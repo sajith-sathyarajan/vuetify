@@ -15,7 +15,6 @@ export interface LocaleProps {
   locale?: string
   fallbackLocale?: string
   messages?: Record<string, any>
-  rtl?: boolean
 }
 
 export interface LocaleInstance {
@@ -158,6 +157,10 @@ export interface RtlOptions {
   isRtl?: boolean
 }
 
+export interface RtlProps {
+  rtl?: boolean
+}
+
 export interface RtlInstance {
   rtl: Record<string, boolean>
   isRtl: Ref<boolean>
@@ -172,7 +175,7 @@ export function createRtl (localeScope: LocaleInstance, options?: RtlOptions) {
   }, localeScope)
 }
 
-export function createRtlScope (currentScope: RtlInstance, localeScope: LocaleInstance, options?: { rtl?: boolean }): RtlInstance {
+export function createRtlScope (currentScope: RtlInstance, localeScope: LocaleInstance, options?: RtlProps): RtlInstance {
   return {
     isRtl: computed(() => {
       if (!!options && typeof options.rtl === 'boolean') return options.rtl
@@ -186,7 +189,7 @@ export function createRtlScope (currentScope: RtlInstance, localeScope: LocaleIn
   }
 }
 
-export function provideRtl (localeScope: LocaleInstance, props: { rtl?: boolean }) {
+export function provideRtl (localeScope: LocaleInstance, props: RtlProps) {
   const currentScope = inject(VuetifyRtlSymbol)
 
   if (!currentScope) throw new Error('rtl provide')
