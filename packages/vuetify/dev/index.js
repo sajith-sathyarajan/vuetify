@@ -31,7 +31,23 @@ const rtl = {
 const vueI18n = {
   createRoot: () => i18n.global,
   getScope: global => useI18n({ legacy: false, useScope: global ? 'global' : 'parent' }),
-  createScope: ({ locale, fallbackLocale }) => useI18n({ legacy: false, useScope: 'local', messages, locale, fallbackLocale, inheritLocale: !locale }),
+  createScope: (props) => {
+    const scope = useI18n({
+      legacy: false,
+      useScope: 'local',
+      messages,
+      locale: props.locale,
+      fallbackLocale: props.fallbackLocale,
+      inheritLocale: !props.locale,
+    })
+
+    watch(() => props.locale, () => {
+      scope.locale.value = props.locale
+    })
+
+    return scope
+  },
+  rtl,
 }
 
 const wrapVueIntl = instance => {
@@ -55,13 +71,17 @@ const vueIntl = {
     const scope = useIntl()
     return wrapVueIntl(scope)
   },
-  createScope: ({ locale, fallbackLocale }) => {
-    console.log('here')
-    const newScope = createIntl({ locale, defaultLocale: fallbackLocale, messages: intlMessages[locale] })
+  createScope: (props) => {
+    const newScope = createIntl({ locale: props.locale, defaultLocale: props.fallbackLocale, messages: intlMessages[props.locale] })
     provideIntl(newScope)
+
+    watch(() => props.locale, () => {
+      newScope.locale = props.locale
+    })
 
     return wrapVueIntl(newScope)
   },
+  rtl,
 }
 
 const vuetify = createVuetify({

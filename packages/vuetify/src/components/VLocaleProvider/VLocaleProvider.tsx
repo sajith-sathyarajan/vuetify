@@ -1,4 +1,5 @@
-import { provideLocale, provideRtl } from '@/composables/locale'
+import { provideLocale } from '@/composables/locale'
+import { provideRtl } from '@/composables/rtl'
 import { defineComponent } from 'vue'
 import { makeProps } from '@/util'
 
