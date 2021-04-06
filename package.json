@@ -1,5 +1,10 @@
 {
-  "private": true,
+  "name": "vuetifyrybbon",
+  "description": "VUe UI",
+  "keywords": [
+    "vuetify"
+  ],
+  "version": "1.0.0",
   "workspaces": [
     "packages/*"
   ],
