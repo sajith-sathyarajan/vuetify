@@ -22,7 +22,7 @@
     "lint": "lerna run lint --parallel --stream",
     "lint:fix": "lerna run lint:fix --parallel",
     "version": "node scripts/confirm-npm-tag.js",
-    "prepare": "node scripts/build.js",
+    "prepare": "node scripts/post-install.js",
     "postversion": "node scripts/post-release-merge.js",
     "clean": "lerna clean"
   },
