@@ -24,8 +24,7 @@
     "version": "node scripts/confirm-npm-tag.js",
     "prepare": "node scripts/build.js",
     "postversion": "node scripts/post-release-merge.js",
-    "clean": "lerna clean",
-    "postinstall": "cd ./node_modules/vuetify && npm install && npm run build"
+    "clean": "lerna clean"
   },
   "engines": {
     "node": "^12 || ^14",
